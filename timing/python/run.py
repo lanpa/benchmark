@@ -19,12 +19,12 @@ if __name__ == "__main__":
     framework.main(
         sys.argv,
         [
-            CPUConvnets,
-            CPULSTMBench,
             CPUNNBench,
+            CPUConvnets,
+            # CPULSTMBench,
             CPUUnaryBench,
             CUDALSTMBench,
-            NumpyReduceComparison,
-            NumpyUnaryComparison,
+            # NumpyReduceComparison,
+            # NumpyUnaryComparison,
         ],
     )

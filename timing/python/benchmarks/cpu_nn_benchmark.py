@@ -30,8 +30,8 @@ class CPUNNBench(Benchmark):
     args = _make_args()
 
     def setupRun(self, state, arg):
-        state.layer_obj = getattr(torch.nn, arg.layer)(*arg.init_args)
-        state.input = torch.randn(*arg.input_size).type("torch.FloatTensor")
+        state.layer_obj = getattr(torch.nn, arg.layer)(*arg.init_args).cuda()
+        state.input = torch.randn(*arg.input_size).type("torch.FloatTensor").cuda()
 
     def benchmark(self, state, arg):
         state.output = state.layer_obj(state.input)

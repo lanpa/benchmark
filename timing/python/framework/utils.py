@@ -73,6 +73,7 @@ def check_cpu_governor(cpu):
                     " off power scaling.".format(cpu, gov, fp)
                 )
     except IOError as e:
+        return
         logger.warning(
             "Could not find CPU {} governor information in filesystem"
             " (are you running on Linux?)\n"

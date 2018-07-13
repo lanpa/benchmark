@@ -18,9 +18,9 @@ class CPUConvnets(Benchmark):
         ("arch", "size"): (
             ("alexnet", (128, 3, 224, 224)),
             ("vgg11", (64, 3, 224, 224)),
-            ("inception_v3", (128, 3, 299, 299)),
-            ("resnet50", (128, 3, 224, 224)),
-            ("squeezenet1_0", (128, 3, 224, 224)),
+            ("inception_v3", (32, 3, 299, 299)),
+            ("resnet50", (32, 3, 224, 224)),
+            ("squeezenet1_0", (32, 3, 224, 224)),
             ("densenet121", (32, 3, 224, 224)),
             # ("mobilenet_v2", (128, 3, 224, 224)),
         ),
@@ -46,11 +46,13 @@ class CPUConvnets(Benchmark):
         ]()  # no need to load pre-trained weights for dummy data
 
         state.optimizer = optim.SGD(state.net.parameters(), lr=0.01)
-        state.criterion = nn.CrossEntropyLoss()
+        state.criterion = nn.CrossEntropyLoss().cuda()
 
-        state.net.eval()
+        state.net.eval().cuda()
 
-        state.data, state.target = Variable(data_), Variable(target_)
+        state.data, state.target = Variable(data_).cuda(), Variable(target_).cuda()
+
+        
 
         state.steps = 0
         state.time_fwd = 0
